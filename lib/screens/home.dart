@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_example/providers/counter_provider.dart';
+import 'package:provider_example/providers/shopping_cart_provider.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Provider Example App (${context.watch<Counter>().count})'),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -24,6 +25,16 @@ class MyHomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/second');
               },
               child: Text('Launch screen'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: context.watch<ShoppingCart>().count,
+                  itemBuilder: (bc, index) {
+                    return Text("dsa");
+                  }),
             ),
           ],
         ),
