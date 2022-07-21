@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_example/providers/second_counter.dart';
 import 'package:provider_example/providers/shopping_cart_provider.dart';
 import 'package:provider_example/screens/home.dart';
 import 'package:provider_example/screens/second_screen.dart';
@@ -12,6 +13,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => Counter()),
         ChangeNotifierProvider(create: (_) => ShoppingCart()),
+        ChangeNotifierProvider(create: (_) => SecondCounter()),
       ],
       child: MyApp(),
     ),

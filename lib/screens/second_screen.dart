@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_example/providers/counter_provider.dart';
+import 'package:provider_example/providers/second_counter.dart';
 import 'package:provider_example/providers/shopping_cart_provider.dart';
 
 class SecondScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class SecondScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Provider Example App (${context.watch<Counter>().count})'),
+        title: Text('Provider Example App (${context.watch<SecondCounter>().count})'),
       ),
       body: Center(
         child: Column(

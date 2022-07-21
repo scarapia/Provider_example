@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_example/providers/counter_provider.dart';
+import 'package:provider_example/providers/second_counter.dart';
 import 'package:provider_example/providers/shopping_cart_provider.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -10,7 +11,8 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Provider Example App (${context.watch<Counter>().count})'),
+        title: Text(
+            'Provider Example App (${context.watch<SecondCounter>().count})'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -18,8 +20,11 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-                'You have pushed the button this many times: ${context.watch<Counter>().count}'),
-            Count(),
+                'You have pushed the button this many times: ${context.watch<SecondCounter>().count}'),
+            Text( //Displaying times pushed
+              "${context.watch<SecondCounter>().count}",
+              style: Theme.of(context).textTheme.headline1,
+            ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/second');
@@ -45,7 +50,8 @@ class MyHomePage extends StatelessWidget {
           FloatingActionButton(
             heroTag: null,
             key: Key('decrement_floatingActionButton'),
-            onPressed: () => context.read<Counter>().decrement(),
+            onPressed: () =>
+                context.read<SecondCounter>().decrementFromCounterTwo(),
             tooltip: 'Decrement',
             child: Icon(Icons.remove),
           ),
@@ -55,7 +61,7 @@ class MyHomePage extends StatelessWidget {
           FloatingActionButton(
             heroTag: null,
             key: Key('reset_floatingActionButton'),
-            onPressed: () => context.read<Counter>().reset(),
+            onPressed: () => context.read<SecondCounter>().resetCounterTwo(),
             tooltip: 'Reset',
             child: Icon(Icons.exposure_zero),
           ),
@@ -65,22 +71,12 @@ class MyHomePage extends StatelessWidget {
           FloatingActionButton(
             heroTag: null,
             key: Key('increment_floatingActionButton'),
-            onPressed: () => context.read<Counter>().increment(),
+            onPressed: () => context.read<SecondCounter>().addToCounterTwo(),
             tooltip: 'Increment',
             child: Icon(Icons.add),
           ),
         ],
       ),
     );
-  }
-}
-
-class Count extends StatelessWidget {
-  Count({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('${context.watch<Counter>().count}',
-        key: Key('counterState'), style: Theme.of(context).textTheme.headline4);
   }
 }
